@@ -1,0 +1,15 @@
+- name: バグ
+  description: 意図しない動きがある、正常に動作していない
+  color: d73a4a
+- name: 改善要望
+  description: 不具合や課題ではないが、対応すると良くなりそうな要望
+  color: 2CB8DF
+- name: 機能不足
+  description: 要望にはっきり書いてあった仕様が入っていない
+  color: F8E604
+- name: 機能追加
+  description: 機能追加要望（お題）
+  color: 3F96EF
+- name: 考慮漏れ
+  description: 明記してなかったけど欲しかった機能、あると思っていた機能なのに実装されていなかった（確認不足）
+  color: 33D6AD
