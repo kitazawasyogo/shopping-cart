@@ -105,7 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ShoppingCart\ShoppingCart.vbproj">
-      <Project>{fe24db40-a70b-4a82-ba68-1bc26e98399c}</Project>
+      <Project>{d1f8f7e7-2b26-40f8-929e-9904d47b4634}</Project>
       <Name>ShoppingCart</Name>
     </ProjectReference>
   </ItemGroup>
