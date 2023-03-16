@@ -22,6 +22,7 @@ Public Class InputValueValidatorTest
     End Sub
 
     <TestCase("list")>
+    <TestCase("list --sort price")>
     Public Sub コマンド入力値が想定内の場合は例外を投げない(inputTestValue As String)
 
         vluseTest.SelectFeatures(inputTestValue)
