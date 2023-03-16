@@ -39,4 +39,39 @@ Public Class OptionalFeaturesTest
 
     End Sub
 
+    <TestCase("apple")>
+    <TestCase("applewatch")>
+    Public Sub 商品名で検索した商品の情報を返すか(searchName As String)
+
+        Dim testList As New List(Of Merchandise) From {
+            New Merchandise("ノート", "自由帳", 200, 100),
+            New Merchandise("applewatch", "中古", 11000, 2),
+            New Merchandise("充電器", "タイプCの充電器", 2000, 10),
+            New Merchandise("椅子", "座椅子", 3000, 20)
+        }
+
+        Dim actual As List(Of Merchandise) = features.SearchByName(searchName, testList)
+
+
+        Assert.That(actual(0).MerchandiseName, [Is].EqualTo(("applewatch")))
+
+    End Sub
+
+    <TestCase("orange")>
+    <TestCase("宇宙船")>
+    Public Sub 商品名で検索した商品の情報が見つからない場合(searchName As String)
+
+        Dim testList As New List(Of Merchandise) From {
+            New Merchandise("ノート", "自由帳", 200, 100),
+            New Merchandise("applewatch", "中古", 11000, 2),
+            New Merchandise("充電器", "タイプCの充電器", 2000, 10),
+            New Merchandise("椅子", "座椅子", 3000, 20)
+        }
+
+        Dim actual As List(Of Merchandise) = features.SearchByName(searchName, testList)
+
+        Assert.That(actual.Count, [Is].EqualTo(0))
+
+    End Sub
+
 End Class

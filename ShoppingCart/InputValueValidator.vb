@@ -33,6 +33,10 @@ Public Class InputValueValidator
 
                 product.DisplayMerchandiseList(features.SortByName(productList))
 
+            ElseIf inputOption(1).Equals("--name") Then
+
+                product.DisplayMerchandiseList(features.SearchByName(inputOption(2), productList))
+
             Else
 
                 Throw New ArgumentException("入力内容が正しくありません。")

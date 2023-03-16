@@ -46,4 +46,17 @@ Public Class OptionalFeatures
 
     End Function
 
+
+    ''' <summary>
+    ''' 名前の曖昧一致検索
+    ''' </summary>
+    ''' <param name="searchName">検索する商品の名前</param>
+    ''' <param name="list">商品一覧</param>
+    ''' <returns>名前の曖昧一致検索の結果</returns>
+    Public Function SearchByName(searchName As String, list As List(Of Merchandise)) As List(Of Merchandise)
+
+        Return list.Where(Function(product) product.MerchandiseName.Contains(searchName)).ToList
+
+    End Function
+
 End Class
