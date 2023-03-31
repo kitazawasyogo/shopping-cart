@@ -74,4 +74,37 @@ Public Class OptionalFeaturesTest
 
     End Sub
 
+    <Test()> Public Sub 価格の範囲で検索した商品の情報を返すか()
+
+        Dim searchPriceRange As String = "100-2500"
+
+        Dim testList As New List(Of Merchandise) From {
+            New Merchandise("ノート", "自由帳", 200, 100),
+            New Merchandise("充電器", "タイプCの充電器", 2000, 10),
+            New Merchandise("椅子", "座椅子", 3000, 20)
+        }
+
+        Dim actual As List(Of Merchandise) = features.SearchByPrice(searchPriceRange, testList)
+
+        Assert.That(actual(0).MerchandiseName, [Is].EqualTo(("ノート")))
+        Assert.That(actual(1).MerchandiseName, [Is].EqualTo(("充電器")))
+
+    End Sub
+
+    <Test()> Public Sub 価格の範囲で検索した商品が無い場合()
+
+        Dim searchPriceRange As String = "10-150"
+
+        Dim testList As New List(Of Merchandise) From {
+            New Merchandise("ノート", "自由帳", 200, 100),
+            New Merchandise("充電器", "タイプCの充電器", 2000, 10),
+            New Merchandise("椅子", "座椅子", 3000, 20)
+        }
+
+        Dim actual As List(Of Merchandise) = features.SearchByPrice(searchPriceRange, testList)
+
+        Assert.That(actual.Count, [Is].EqualTo(0))
+
+    End Sub
+
 End Class

@@ -59,4 +59,19 @@ Public Class OptionalFeatures
 
     End Function
 
+
+    ''' <summary>
+    ''' 価格の範囲検索
+    ''' </summary>
+    ''' <param name="searchPriceRange">検索する商品の価格の範囲</param>
+    ''' <param name="list">商品一覧</param>
+    ''' <returns>価格の範囲検索の結果</returns>
+    Public Function SearchByPrice(searchPriceRange As String, list As List(Of Merchandise)) As List(Of Merchandise)
+
+        Dim searchPrice() As String = Split(searchPriceRange, "-")
+
+        Return list.Where(Function(product) Integer.Parse(searchPrice(0)) <= product.MerchandisePrice AndAlso product.MerchandisePrice <= Integer.Parse(searchPrice(1))).ToList
+
+    End Function
+
 End Class

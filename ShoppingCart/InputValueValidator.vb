@@ -1,4 +1,7 @@
-﻿''' <summary>
+﻿Imports System.Text.RegularExpressions
+
+
+''' <summary>
 ''' 入力値を検証する
 ''' </summary>
 Public Class InputValueValidator
@@ -37,6 +40,10 @@ Public Class InputValueValidator
 
                 product.DisplayMerchandiseList(features.SearchByName(inputOption(2), productList))
 
+            ElseIf inputOption(1).Equals("--price") AndAlso ValidatePriceRange(inputOption(2)) Then
+
+                product.DisplayMerchandiseList(features.SearchByPrice(inputOption(2), productList))
+
             Else
 
                 Throw New ArgumentException("入力内容が正しくありません。")
@@ -49,6 +56,29 @@ Public Class InputValueValidator
 
         End If
 
+
     End Sub
+
+
+    ''' <summary>
+    ''' 価格範囲検索機能の価格入力値チェック
+    ''' </summary>
+    ''' <param name="input"></param>
+    ''' <returns></returns>
+    Public Function ValidatePriceRange(input As String) As Boolean
+
+        Const REQUIRE_PARAM_LENGTH_PRICE_RANGE As Integer = 2
+
+        Dim priceRange As String() = Split(input, "-")
+
+        If Not New Regex("[0-9]\d{1,}\-[0-9]\d{1,}$").IsMatch(input) OrElse Not priceRange.Length = REQUIRE_PARAM_LENGTH_PRICE_RANGE Then
+
+            Throw New ArgumentException("入力内容が正しくありません。")
+
+        End If
+
+        Return True
+
+    End Function
 
 End Class
