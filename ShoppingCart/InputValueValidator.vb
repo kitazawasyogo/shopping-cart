@@ -50,13 +50,13 @@ Public Class InputValueValidator
 
             Else
 
-                Throw New ArgumentException("入力内容が正しくありません。")
+                Throw New ArgumentException("入力内容が正しくありません。" & MakeSuggestFeatures(input))
 
             End If
 
         Else
 
-            Throw New ArgumentException("入力内容が正しくありません。")
+            Throw New ArgumentException("入力内容が正しくありません。" & MakeSuggestFeatures(input))
 
         End If
 
@@ -82,6 +82,65 @@ Public Class InputValueValidator
         End If
 
         Return True
+
+    End Function
+
+
+    ''' <summary>
+    ''' サジェスト機能で表示する文字列を作る
+    ''' </summary>
+    ''' <param name="inputValue">入力値</param>
+    ''' <returns>表示する文字列</returns>
+    Public Function MakeSuggestFeatures(inputValue As String) As String
+
+        Dim message As String = "もしかして："
+
+        Dim input As String = inputValue.Replace("-", "")
+        Dim inputOption As String() = Split(input, " ")
+
+        Dim commandSuggestJudgment As String = Strings.Left(inputOption(0), 2)
+
+        If inputOption(0).Equals("list") Then
+
+            Dim optionSuggestJudgment As String = Strings.Left(inputOption(1), 2)
+
+            If optionSuggestJudgment.Equals("he") Then
+
+                message &= "list --help"
+
+            ElseIf optionSuggestJudgment.Equals("na") Then
+
+                message &= "list --name 名前"
+
+            ElseIf optionSuggestJudgment.Equals("pr") Then
+
+                message &= "list --price 価格-価格"
+
+            ElseIf optionSuggestJudgment.Equals("so") Then
+
+                message &= "list --sort name,list --sort price"
+
+            Else
+
+                Return Nothing
+
+            End If
+
+        ElseIf commandSuggestJudgment.Equals("he") Then
+
+            message &= "help"
+
+        ElseIf commandSuggestJudgment.Equals("li") Then
+
+            message &= "list"
+
+        Else
+
+            Return Nothing
+
+        End If
+
+        Return message
 
     End Function
 
