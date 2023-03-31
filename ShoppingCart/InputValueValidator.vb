@@ -22,7 +22,11 @@ Public Class InputValueValidator
 
         Dim inputOption As String() = Split(input, " ")
 
-        If input.Equals("list") Then
+        If input.Contains("help") Then
+
+            features.DisplayHelpMessage(features.MakeHelpMessage(input))
+
+        ElseIf input.Equals("list") Then
 
             product.DisplayMerchandiseList(productList)
 

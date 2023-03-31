@@ -74,4 +74,43 @@ Public Class OptionalFeatures
 
     End Function
 
+
+    ''' <summary>
+    ''' ヘルプ機能の表示するメッセージを作る
+    ''' </summary>
+    ''' <param name="input">入力値</param>
+    Public Function MakeHelpMessage(input As String) As String
+
+        If input.Equals("help") Then
+
+            Return "list:商品一覧を表示する事が出来ます。"
+
+        ElseIf input.Equals("list --help") Then
+
+            Return "--name 名前:商品名の曖昧一致検索を行えます。" &
+                    vbCrLf & "--price 価格-価格:指定した価格内に収まる商品の検索を行えます。" &
+                    vbCrLf & "--sort name:商品一覧を商品名の昇順に並び替える事が出来ます。" &
+                    vbCrLf & "--sort price:商品一覧を価格の昇順に並び替える事が出来ます。"
+
+        Else
+
+            Throw New ArgumentException("入力内容が正しくありません。")
+
+        End If
+
+        Throw New InvalidOperationException
+
+    End Function
+
+
+    ''' <summary>
+    ''' ヘルプ機能のメッセージを表示する
+    ''' </summary>
+    ''' <param name="message">表示するヘルプメッセージ</param>
+    Public Sub DisplayHelpMessage(message As String)
+
+        Console.WriteLine(message)
+
+    End Sub
+
 End Class

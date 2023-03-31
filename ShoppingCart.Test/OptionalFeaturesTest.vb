@@ -107,4 +107,44 @@ Public Class OptionalFeaturesTest
 
     End Sub
 
+    <Test()> Public Sub コマンドヘルプ機能が表示する適切な文言を返すか()
+
+        Dim message As String = "help"
+
+        Dim actual As String = features.MakeHelpMessage(message)
+
+
+        Assert.That(actual, [Is].EqualTo(("list:商品一覧を表示する事が出来ます。")))
+
+    End Sub
+
+    <Test()> Public Sub オプションヘルプ機能が表示する適切な文言を返すか()
+
+        Dim message As String = "list --help"
+
+        Dim actual As String = features.MakeHelpMessage(message)
+
+        Assert.That(actual, [Is].EqualTo(("--name 名前:商品名の曖昧一致検索を行えます。" &
+                                 vbCrLf & "--price 価格-価格:指定した価格内に収まる商品の検索を行えます。" &
+                                 vbCrLf & "--sort name:商品一覧を商品名の昇順に並び替える事が出来ます。" &
+                                 vbCrLf & "--sort price:商品一覧を価格の昇順に並び替える事が出来ます。")))
+
+    End Sub
+
+    <TestCase("help     ")>
+    <TestCase("list --helphelp")>
+    Public Sub ヘルプ機能の入力値が想定外の場合は例外を投げる(inputTestValue As String)
+
+        Try
+            features.MakeHelpMessage(inputTestValue)
+            Assert.Fail()
+
+        Catch ex As ArgumentException
+
+            Assert.That(ex.Message, [Is].EqualTo("入力内容が正しくありません。"))
+
+        End Try
+
+    End Sub
+
 End Class
